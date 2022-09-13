@@ -12,7 +12,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/authorization/armauthorization"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/subscription/armsubscription"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 const defaultTimeout = 30 * time.Second
@@ -198,7 +198,10 @@ func (s *Session) ActiveRoleAssignment(subscriptionName, roleDisplayName, justif
 	}
 
 	scope := fmt.Sprintf("/subscriptions/%s", subscriptionID)
-	guid := uuid.NewV1().String()
+	guid, err := uuid.NewUUID()
+	if err != nil {
+		return err
+	}
 
 	rasc, err := armauthorization.NewRoleAssignmentScheduleRequestsClient(
 		s.credential, nil)
@@ -210,7 +213,7 @@ func (s *Session) ActiveRoleAssignment(subscriptionName, roleDisplayName, justif
 	resp, err := rasc.Create(
 		ctx,
 		scope,
-		guid,
+		guid.String(),
 		req,
 		&armauthorization.RoleAssignmentScheduleRequestsClientCreateOptions{},
 	)
