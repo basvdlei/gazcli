@@ -109,11 +109,11 @@ func (s *Session) roleEligibilitySchedules(scope string) (map[string]*armauthori
 	if err != nil {
 		return nil, err
 	}
+	filter := "asTarget()"
 	pager := rsi.NewListForScopePager(
 		scope,
 		&armauthorization.RoleEligibilitySchedulesClientListForScopeOptions{
-			//TODO add a filter since we are getting more roles
-			//then the portal and some duplicates.
+			Filter: &filter,
 		},
 	)
 	ctx, cancel := context.WithTimeout(s.ctx, s.timeout)
