@@ -14,7 +14,7 @@ import (
 var appFlags = []cli.Flag{
 	&cli.StringFlag{
 		Name:  "userid",
-		Usage: "UserID (get it with: 'az ad signed-in-user show | jq .id')",
+		Usage: "UserID (get it with: 'az ad signed-in-user show -o json | jq .id')",
 	},
 }
 var appCommands = []*cli.Command{
