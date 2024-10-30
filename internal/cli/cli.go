@@ -118,7 +118,7 @@ func NewGazcli() error {
 			Name: "Bas van der Lei",
 		},
 	}
-	app.Version = "0.0.1"
+	app.Version = "0.0.2"
 	app.Usage = "Go Azure CLI"
 	app.Name = "gazcli"
 	app.Flags = appFlags
