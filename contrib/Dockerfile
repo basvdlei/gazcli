@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine AS builder
+FROM golang:1.23-alpine AS builder
 ENV GO_ENABLED=0
 RUN go install github.com/basvdlei/gazcli/cmd/gazcli@latest
 
